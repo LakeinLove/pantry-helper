@@ -26,10 +26,10 @@ func main() {
 			},
 		}
 		tmpl.Execute(w, films)
-
 	}
 
 	h2 := func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(r.Method)
 		title := r.PostFormValue("title")
 		director := r.PostFormValue("director")
 		tmpl := template.Must(template.ParseFiles("index.html"))
@@ -39,5 +39,5 @@ func main() {
 	http.HandleFunc("/", h1)
 	http.HandleFunc("/add-film/", h2)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }
